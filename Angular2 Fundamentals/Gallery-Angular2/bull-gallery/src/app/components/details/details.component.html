@@ -1,0 +1,66 @@
+<main>
+  <div class="detailed">
+    <div class="wp-content">
+      <h1>{{article?.title}}</h1>
+
+      <div class="details-image"  [ngStyle]="{'background-image': 'url(' + article?.image + ')'} ">
+        <!--<img [src]="article?.image" alt="Loading...">-->
+      </div>
+
+      <div class="responsive-details">
+        <p class="details-p-left">{{calcTime(article?._kmd['lmt'])}} ago by <span>{{article?.creator}}</span> in
+          {{article?.category}}</p>
+        <p class="details-p-right">{{article?.counter}} views</p>
+
+        <h3>Description</h3>
+        <div class="description">
+          <p>{{article?.description}}</p>
+        </div>
+      </div>
+
+      <modal-gallery [modalImages]="article.image"></modal-gallery>
+
+    </div>
+    <br>
+
+    <div class="responsive-details">
+      <div class="properties">
+        <!--<h2>Properties</h2>-->
+
+        <button class="btn btn--default shiny btn-download"><a href="{{article?.image}}" download>Download</a></button>
+        <span *ngIf="article?.creator == username || isAdmin()">
+          <button (click)="editPostNavigate()" class="btn btn--default shiny btn-edit">Edit</button>
+          <button (click)="deletePost()" class="btn btn--default shiny btn-delete">Delete</button>
+        </span>
+      </div>
+      <hr>
+
+      <!--COMMENT SECTION-->
+      <div class="comments-section">
+        <h2>Comments</h2>
+
+        <p *ngIf="commentFail">Enter comment</p>
+        <div class="submit">
+          <textarea [(ngModel)]="model.comment" name="comment" class="text-area" cols="50" rows="5"></textarea>
+          <button (click)="submit()" type="submit" class="btn btn--default shiny btn-edit">Submit</button>
+        </div>
+
+        <span *ngIf="arr">
+          <div *ngFor="let comment of arr" class="comment">
+            <span *ngIf="comment.username === username || isAdmin()"><span class="hiks"
+                                                                           (click)="deleteComment(comment._id)">x</span></span>
+            <p class="uploaded-by">{{calcTime(comment._kmd.lmt)}} by {{comment.username}}</p>
+            <p>{{comment.comment}}</p>
+          </div>
+        </span>
+        <p *ngIf="arr.length === 0">No comments yet.</p>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<!--<textarea (input)="textValue = $event.target.value"  class="text-area" name="commentArea" cols="50" rows="5"></textarea>-->

@@ -1,0 +1,13 @@
+1. --dbpath
+2. express --view=hbs appFolderName  => in folder with node_modules
+3. appFolderName => npm install
+4. npm start
+5. default localhost:3000
+
+E:\Programs\MongoDB\bin\mongod.exe --dbpath "E:\Programs\#JavaScript\JS Web\ExpressJs Fundamentals\MongoData"
+
+database.js - require DB Schemas
+routes.js - all GET and POST query
+
+
+

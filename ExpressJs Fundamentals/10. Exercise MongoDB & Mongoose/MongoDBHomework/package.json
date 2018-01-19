@@ -1,0 +1,16 @@
+{
+  "name": "exercise04",
+  "version": "1.0.0",
+  "description": "mongo db homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MN",
+  "license": "MIT",
+  "dependencies": {
+    "formidable": "^1.1.1",
+    "mongoose": "^4.12.1",
+    "querystring": "^0.2.0"
+  }
+}

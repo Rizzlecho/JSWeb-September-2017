@@ -1,0 +1,47 @@
+<main>
+    <section class="ticket-area">
+        <div class="ticket-area-left">
+            <img src="{{flight.imageUrl}}" alt="">
+        </div>
+        <div class="ticket-area-right">
+            <h3 style="text-transform: uppercase">{{flight.destination}}</h3>
+            <div>from {{flight.origin}}</div>
+            <div class="data-and-time">
+                {{flight.date}} {{flight.time}}
+                {{#if currentUser.isAdmin}}
+                    <form action="/details/{{flight.id}}" method="post">
+                        <input type="submit" class="create" value="Publish Flight">
+                    </form>
+                    <a href="/edit/{{flight.id}}" class="edit-flight-detail"></a>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+
+    <section class="seat-info">
+        {{#if currentUser.isAdmin}}
+            <form action="/details/{{flight.id}}" class="seat-form" method="post">
+                <input type="text" placeholder="Price" name="price">
+                <input type="text" placeholder="Type" name="type">
+                <input type="number" min="1" max="999" placeholder="Tickets Counter" name="ticketCounter">
+                <input type="submit" class="create-seat" value="Create Seat">
+            </form>
+        {{/if}}
+    </section>
+
+    {{#each seats}}
+        <section class="flight-details">
+            <form action="" class="seat-form">
+                <span>{{this.price}}$</span><span>{{this.type}}</span>
+                <input type="text" placeholder="Add Number">
+                <input type="submit" class="create-seat" value="Add to Cart">
+                {{#if currentUser.isAdmin}}
+                    <a href="" class="delete">X</a>
+                {{/if}}
+            </form>
+        </section>
+    {{else}}
+        <h3>No seats for this flight</h3>
+    {{/each}}
+
+</main>

@@ -1,0 +1,29 @@
+{{#if currentUser}}
+<main>
+    <h1>Customize your order</h1>
+    <div class="catalog">
+        <div class="column">
+            <img class="added-img" src="{{product.image}}">
+        </div>
+        <div class="column">
+            <h2>{{product.category}} doner, {{product.size}}</h2>
+            <h3>Toppings</h3>
+            <div class="toppings">
+                <form action="/order/{{product._id}}" method="post">
+                    <!--<input name="product_id" type="hidden" value="chicken_21">-->
+                    {{#each product.topData}}
+                        <input name="topping05" type="checkbox" value="topping05"><label for="topping05">{{this}}</label><br>
+                    {{/each}}
+                    <!--<input name="topping01" type="checkbox" value="topping01" checked><label for="topping01">Pickles</label><br>-->
+                    <!--<input name="topping02" type="checkbox" value="topping02" checked><label for="topping02">Tomato</label><br>-->
+                    <!--<input name="topping05" type="checkbox" value="topping05"><label for="topping05">Hot Sauce</label><br>-->
+                </form>
+            </div>
+            <a class="button" href="#">Checkout</a>
+        </div>
+    </div>
+</main>
+
+{{else}}
+    <h3>U must be logged in to order.</h3>
+{{/if}}

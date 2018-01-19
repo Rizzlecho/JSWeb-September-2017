@@ -1,0 +1,28 @@
+<div class="heading">
+  <h1>Profile</h1>
+  <hr>
+</div>
+
+<div class="login-page profile-page">
+  <div class="form  profile-form">
+
+    <!--Form-->
+    <form  (ngSubmit)="update(editProfile)" [formGroup]="editProfile" class="login-form">
+      <div class="login-form">
+        <img src={{avatar}} alt="img">
+        <label for="avatar">Choose Avatar</label>
+        <input formControlName="newAvatar" id="avatar" type="text" placeholder="" value={{avatar}}/>
+      </div>
+
+      <div class="login-form">
+        <label for="title">Username</label>
+        <input id="title" type="text" placeholder="Name" value="{{username}}" disabled/>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Name" value="password" disabled/>
+
+        <button type="submit" class="btn btn--default shiny btn-login">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

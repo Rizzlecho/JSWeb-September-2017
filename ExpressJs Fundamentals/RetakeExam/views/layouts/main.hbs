@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Demo Server</title>
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav>
+    <div class="left-container">
+        <ul>
+
+            <li><a href="/">Flights</a></li>
+            {{#if currentUser}}
+                <li><a href="/myTickets">My Tickets</a></li>
+            {{else}}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            {{/if}}
+        </ul>
+    </div>
+    <div class="right-container">
+        <ul>
+        {{#if currentUser}}
+            <li>Welcome, {{currentUser.username}}
+            <form id="logout-form" action="/logout" method="post"></form>
+            <a href="javascript:document.getElementById('logout-form').submit()">Logout</a></li>
+            <a href=""><img src="/img/cart.png" alt="" class="cart"></a>
+        {{/if}}
+        </ul>
+    </div>
+</nav>
+
+
+<main>
+    {{#if globalError}}
+        <span>{{globalError}}</span>
+    {{/if}}
+
+    {{{body}}}
+</main>
+<footer>SoftUni Airline</footer>
+
+</body>
+
+</html>

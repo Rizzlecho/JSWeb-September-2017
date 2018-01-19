@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <script src="scripts/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul class="nav-bar">
+            <li class="left"><a href="index.html">Home</a></li>
+            <li class="left">
+                <a href="" class="dropdown">Categories</a>
+                <div class="dropdown-content">
+                    <a href="#">Abstract</a>
+                    <a href="#">Nature</a>
+                    <a href="#">Cities</a>
+                    <a href="#">Vintage</a>
+                    <a href="#">Cars</a>
+                    <a href="#">Beauty</a>
+                </div>
+            </li>
+
+            <li class="right"><img class="avatar" src="http://static2.businessinsider.com/image/5899ffcf6e09a897008b5c04-1200/.jpg"></li>
+            <li class="right"><a href="">Rizzle</a></li>
+            <!--<li class="right"><a href="register.html">Register</a></li>-->
+            <!--<li class="right"><a href="login.html">Login</a></li>-->
+            <li class="right"><a href="admin.html">Admin</a></li>
+            <li class="right upload shiny"><a href="upload.html">Upload</a></li>
+        </ul>
+
+
+        <div id="nav-icon4">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="mobile-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Admin</a></li>
+            <li><a href="#">Rizzle</a></li>
+            <li class="shiny"><a href="#">Upload</a></li>
+        </ul>
+
+    </nav>
+</header>
+
+
+<div class="login-page">
+    <div class="form  upload-form">
+        <div class="row header">
+            <div class="large-12 columns">UPLOAD</div>
+        </div>
+
+        <form class="login-form">
+            <label for="title">Title</label>
+            <input id="title" type="text" placeholder="Title"/>
+
+            <label for="image">Image</label>
+            <input id="image" type="text" placeholder="Image"/>
+
+            <label for="select">Select</label>
+            <select name="" id="select">
+                <option value="category" class="option" disabled selected>choose a category</option>
+                <option value="Sports" class="option">Sports</option>
+                <option value="Nature" class="option">Nature</option>
+            </select>
+
+
+            <label for="description">Description</label>
+            <textarea id="description" placeholder="Description"></textarea>
+
+
+            <button class="btn btn--default shiny btn-login">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+<footer>
+    <div class="footer">
+        <p><span></span>Cvetomir Shkondachki @SoftUni 2017</p>
+    </div>
+</footer>
+
+<script src="scripts/script.js"></script>
+</body>
+</html>

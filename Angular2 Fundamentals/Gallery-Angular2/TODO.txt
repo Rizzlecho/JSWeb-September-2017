@@ -1,0 +1,19 @@
+﻿1. //DONE Auth Guard
+7. //DONE /details
+5. //DONE Правилна заявка за аватар.
+6. //DONE PUT заявка за /profile
+2. //DONE Масив от категории.
+3. //DONE Заявка за листване на категория.
+14. //DONE Admin Guard
+12. //DONE Delete Post
+10. //DONE Admin Panel
+4. //DONE Проверка на масива от категории дали се съдържа самата категория при опит за html ръчен option, и ако не съществува Error.
+13. //DONE Листване на постове от категория.
+11. //DONE Edit Post
+15. //DONE Confirm Password
+9. // DONE Comments
+
+8. Click Count
+
+
+

@@ -1,0 +1,44 @@
+<main>
+    <form action="" class="catalog-form">
+        <label>Destination:</label>
+        <input type="text" placeholder="Destination">
+        <label>Origin:</label>
+        <input type="text" placeholder="Origin">
+        <label>Departure:</label>
+        <input type="text" placeholder="Departure">
+        <input type="submit" class="search" value="Search">
+
+        {{#if currentUser.isAdmin}}
+            <a href="/addFlight" class="add-flight">Add Flight +</a>
+        {{/if}}
+    </form>
+
+    <section class="added-flights">
+        {{#if currentUser.isAdmin}}
+            {{#each allFlights}}
+                <a class="added-flight" href="/details/{{this._id}}">
+                    <img src="{{this.imageUrl}}" alt="" class="picture-added-flight">
+                    <h3>{{this.destination}}</h3>
+                    <span>from {{this.origin}}</span><span>{{this.date}}</span>
+                </a>
+            {{/each}}
+            {{#each allPublicFlights}}
+                <a class="added-flight" href="/details/{{this._id}}">
+                    <img src="{{this.imageUrl}}" alt="" class="picture-added-flight">
+                    <h3>{{this.destination}}</h3>
+                    <span>from {{this.origin}}</span><span>{{this.date}}</span>
+                </a>
+            {{/each}}
+        {{else}}
+            {{#each allPublicFlights}}
+                <a class="added-flight" href="/details/{{this._id}}">
+                    <img src="{{this.imageUrl}}" alt="" class="picture-added-flight">
+                    <h3>{{this.destination}}</h3>
+                    <span>from {{this.origin}}</span><span>{{this.date}}</span>
+                </a>
+            {{/each}}
+        {{/if}}
+
+
+    </section>
+</main>

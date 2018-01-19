@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+<nav>
+    <div class="left-container">
+        <ul>
+            <li><a href="">Trains</a></li>
+            <li><a href="">My Tickets</a></li>
+            <li><a href="">Login</a></li>
+            <li><a href="">Register</a></li>
+        </ul>
+    </div>
+    <div class="right-container">
+        <span>Welcome, {name} |</span>
+        <a href="" class="log-out">Logout</a>
+        <a href=""><img src="static/img/cart.png" alt="" class="cart"></a>
+    </div>
+</nav>
+<main>
+  <div class ="train-logo">
+  </div>
+    <form action="" class="search-form">
+        <label>Destination:</label>
+        <input type="text" placeholder="Destination" >
+        <label>Origin:</label>
+        <input type="text" placeholder="Origin">
+        <label>Departure:</label>
+        <input type="text" placeholder="Departure">
+        <input type="submit" class="search" value="Search">
+    </form>
+    </div>
+
+    <section class="added-trains">
+        <a class="added-train">
+            <img src="static/img/train-station.jpg" alt="" class="picture-added-train">
+            <h3>Burgas</h3>
+            <span>from Sofia</span>
+			<span>departs 06:40</span>
+			<span>arrives 13:27</span>
+			<span>duration 6:47</span>
+        </a>
+        <a class="added-train">
+            <img src="static/img/train-station.jpg" alt="" class="picture-added-train">
+            <h3>Burgas</h3>
+            <span>from Plovdiv</span>
+			<span>departs 08:55</span>
+			<span>arrives 13:05</span>
+			<span>duration 4:10</span>
+        </a>
+        <a class="added-train">
+            <img src="static/img/train-station.jpg" alt="" class="picture-added-train">
+            <h3>Sofia</h3>
+            <span>from Burgas</span>
+			<span>departs 14:30</span>
+			<span>arrives 21:46</span>
+			<span>duration 7:16</span>
+        </a>
+    </section>
+    <footer>SoftUni RailWays</footer>
+</main>
+</body>
+</html>

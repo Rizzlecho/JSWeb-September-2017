@@ -1,0 +1,38 @@
+<div class="login-page">
+  <div class="form  upload-form">
+    <div class="row header">
+      <div class="large-12 columns">EDIT POST</div>
+    </div>
+
+    <!--NOTIFICATION-->
+    <div *ngIf="titleFail" class="shiny btn-delete" style="margin-top: 20px;">Please fill title field!</div>
+    <div *ngIf="imageFail" class="shiny btn-delete" style="margin-top: 20px;">Please fill image field!</div>
+    <div *ngIf="categoryFail" class="shiny btn-delete" style="margin-top: 20px;">Please choose category!</div>
+    <div *ngIf="descriptionFail" class="shiny btn-delete" style="margin-top: 20px;">Please fill the description!</div>
+
+    <span *ngIf="ifNotValid">
+      <div *ngIf="!validCategory" class="shiny btn-delete" style="margin-top: 20px;">Please choose a valid category!</div>
+    </span>
+
+    <form class="login-form" (ngSubmit)="submit()" [formGroup]="editPostGroup">
+      <label for="title">Title</label>
+      <input formControlName="title" id="title" type="text" placeholder="Title"/>
+
+      <label for="image">Image</label>
+      <input formControlName="image" id="image" type="text" placeholder="Image"/>
+
+      <label for="select">Category</label>
+      <select (change)="onChange($event.target.value)" name="category" id="select">
+        <option value="category" class="option" disabled selected>choose a category</option>
+        <option value={{category}} *ngFor="let category of categoriesArr">{{category}}</option>
+      </select>
+
+
+      <label for="description">Description</label>
+      <textarea formControlName="description" id="description" placeholder="Description"></textarea>
+
+
+      <button class="btn btn--default shiny btn-login" type="submit">Save</button>
+    </form>
+  </div>
+</div>

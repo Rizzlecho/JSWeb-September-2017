@@ -1,0 +1,13 @@
+<div>
+  <div><em>{{article?.title}}</em></div>
+
+  <div><strong>{{article?.author}}</strong></div>
+
+  <button class="btn" *ngIf="displayImage==false" (click)="showImage()">Show Image</button>
+  <div><img src="{{article?.link}}" *ngIf="displayImage===true" (click)="hideImage() "></div>
+
+  <div>{{trunc(article?.text)}}</div>
+
+  <button class="btn" *ngIf="hide==false" (click)="readMore()">Read More</button>
+  <button class="btn" *ngIf="hide==true" (click)="hideText()">Hide All</button>
+</div>

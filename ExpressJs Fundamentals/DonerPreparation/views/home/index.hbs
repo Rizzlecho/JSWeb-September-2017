@@ -1,0 +1,75 @@
+<h1>Welcome to Doner Place!</h1>
+<p>We offer a wide variety of tasty doner kebab, cutosmized to your liking. Choose from different sizes of chicken, beef
+    and lamb and any topping you want. Place your order now!</p>
+{{#if currentUser.isAdmin}}
+
+    <div class="products">
+        <h2>Admin</h2>
+        <div class="product-card">
+            <img src="/img/new.png">
+            <a href="/createProduct" class="button product-title">Create Product</a>
+        </div>
+    </div>
+    <div class="products">
+        <h2>Chicken Doner</h2>
+        {{#each chickens}}
+            <div class="product-card">
+                <img src="{{this.imageUrl}}">
+                <a href="/edit/{{this._id}}" class="control"><img class="control-img" src="/img/edit.png"></a>
+                <a href="/delete/{{this._id}}" class="control"><img class="control-img" src="/img/delete.png"></a>
+            </div>
+        {{else}}
+            <p>There are no Chicken Doners</p>
+        {{/each}}
+        <h2>Beef Doner</h2>
+        {{#each beefs}}
+            <div class="product-card">
+                <img src="{{this.imageUrl}}">
+                <a href="/edit/{{this._id}}" class="control"><img class="control-img" src="/img/edit.png"></a>
+                <a href="/delete/{{this._id}}" class="control"><img class="control-img" src="/img/delete.png"></a>
+            </div>
+        {{else}}
+            <p>There are no Beef Doners</p>
+        {{/each}}
+        <h2>Lamb Doner</h2>
+        {{#each lambs}}
+            <div class="product-card">
+                <img src="{{this.imageUrl}}">
+                <a href="/edit/{{this._id}}" class="control"><img class="control-img" src="/img/edit.png"></a>
+                <a href="/delete/{{this._id}}" class="control"><img class="control-img" src="/img/delete.png"></a>
+            </div>
+        {{else}}
+            <p>There are no Lamb Doners</p>
+        {{/each}}
+    </div>
+{{else}}
+    <div class="products">
+        <h2>Chicken Doner</h2>
+        {{#each chickens}}
+            <div class="product-card">
+                <img src="{{this.imageUrl}}">
+                <a href="/order/{{this._id}}" class="button product-title">Order</a>
+            </div>
+        {{else}}
+            <p>There are no Chicken Doners</p>
+        {{/each}}
+        <h2>Beef Doner</h2>
+        {{#each beefs}}
+            <div class="product-card">
+                <img src="{{this.imageUrl}}">
+                <a href="/order/{{this._id}}" class="button product-title">Order</a>
+            </div>
+        {{else}}
+            <p>There are no Beef Doners</p>
+        {{/each}}
+        <h2>Lamb Doner</h2>
+        {{#each lambs}}
+            <div class="product-card">
+                <img src="{{this.imageUrl}}">
+                <a href="/order/{{this._id}}" class="button product-title">Order</a>
+            </div>
+        {{else}}
+            <p>There are no Lamb Doners</p>
+        {{/each}}
+    </div>
+{{/if}}

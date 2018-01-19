@@ -1,0 +1,25 @@
+{
+  "name": "exam-prep-2",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "react": "^16.2.0",
+    "react-collapse": "^4.0.3",
+    "react-dom": "^16.1.1",
+    "react-motion": "^0.5.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-slide-toggle": "0.0.28",
+    "toastr": "^2.1.4"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

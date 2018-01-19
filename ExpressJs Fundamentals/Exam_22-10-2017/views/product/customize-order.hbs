@@ -1,0 +1,27 @@
+<main>
+    <h1>Customize Your Order</h1>
+    <div class="catalog">
+        <div class="column">
+            <img src="{{product.imageUrl}}">
+        </div>
+        <div class="column">
+            <h1 style="text-transform: capitalize">{{product.category}} Doner, {{product.size}}cm</h1>
+            <br>
+            <h3>Toppings</h3>
+            <br>
+            <div class="toppings">
+                <form method="POST" action="/order/{{product._id}}">
+                    {{#each product.toppings}}
+                        <input name="{{this}}" type="checkbox" value="{{this}}">
+                        <label for="topping01">{{this}}</label>
+                        <br>
+                    {{else}}
+                        <p>No toppings available!</p>
+                    {{/each}}
+                    <br>
+                    <input class="button" type="submit" value="Checkout">
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

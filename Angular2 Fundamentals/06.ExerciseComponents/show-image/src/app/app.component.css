@@ -1,0 +1,22 @@
+* {
+  font-family: sans-serif; }
+
+.article {
+  width: 300px;
+  height: auto;
+  background: darkgreen;
+  color: white;
+  padding: 10px; }
+  .article > * {
+    cursor: pointer; }
+
+.header {
+  padding: 10px;
+  width: 300px;
+  height: auto;
+  background: #343434;
+  color: white; }
+  .header > * {
+    cursor: pointer; }
+
+/*# sourceMappingURL=app.component.css.map */

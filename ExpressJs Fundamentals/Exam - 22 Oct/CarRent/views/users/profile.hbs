@@ -1,0 +1,27 @@
+<h2>My rented cars</h2>
+<br>
+
+<body>
+
+<table class="table-fill">
+    <thead>
+    <tr>
+        <th class="text-left">Mark</th>
+        <th class="text-left">Model</th>
+        <th class="text-left">Year</th>
+        <th class="text-left">Rent Time</th>
+    </tr>
+    </thead>
+    <tbody class="table-hover">
+
+    {{#each dataObj}}
+    <tr>
+        <td class="text-left">{{this.mark}}</td>
+        <td class="text-left">{{this.model}}</td>
+        <td class="text-left">{{this.year}}</td>
+        <td class="text-left">{{this.days}}</td>
+    </tr>
+    {{/each}}
+
+    </tbody>
+</table>

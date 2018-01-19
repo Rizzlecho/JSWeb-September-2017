@@ -1,0 +1,23 @@
+<div class="login-page">
+  <div class="form">
+    <div class="row header">
+      <div class="large-12 columns">SIGN UP</div>
+    </div>
+
+    <!--NOTIFICATION-->
+    <div *ngIf="userN" class="shiny btn-delete" style="margin-top: 20px;">Please fill the username field!</div>
+    <div *ngIf="passW" class="shiny btn-delete" style="margin-top: 20px;">Please fill the password field!</div>
+    <div *ngIf="confirmP" class="shiny btn-delete" style="margin-top: 20px;">Passwords do not match!</div>
+
+
+    <form class="login-form" (ngSubmit)="submit()" [formGroup]="register">
+      <input type="text" placeholder="Username" formControlName="username" name="username"/>
+      <span formGroupName="auth">
+      <input type="password" placeholder="Password" formControlName="password" name="password"/>
+      <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" name="confirmPassword"/>
+      </span>
+      <button class="btn btn--default shiny btn-login" type="submit">Register</button>
+      <p class="message">Already have an account? <a routerLink="/login">Login</a></p>
+    </form>
+  </div>
+</div>

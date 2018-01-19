@@ -1,0 +1,40 @@
+<!--<a href="details/{{this._id}}">--><!--</a>-->
+<br>
+<h2 style="text-align: center">Beef Doner</h2>
+<div class="products">
+{{#each beef}}
+        <div class="product-card" style="display: inline-block"><img class="added-img" src="{{this.image}}">{{this.size}}cm <a
+                href="details/{{this._id}}"
+                class="button product-title">Order</a></div>
+{{else}}
+    <h3>No Beef Doners</h3>
+{{/each}}
+</div>
+<br><br>
+
+
+
+<<h2 style="text-align: center">Beef Doner</h2>
+<div class="products">
+    {{#each chicken}}
+        <div class="product-card" style="display: inline-block"><img class="added-img" src="{{this.image}}">{{this.size}}cm <a
+                href="details/{{this._id}}"
+                class="button product-title">Order</a></div>
+    {{else}}
+        <h3>No Chicken Doners</h3>
+    {{/each}}
+</div>
+
+<h2 style="text-align: center">Lamb Doner</h2>
+<div class="products">
+    {{#each lamb}}
+        <div class="product-card" style="display: inline-block"><img class="added-img" src="{{this.image}}">{{this.size}}cm <a
+                href="details/{{this._id}}"
+                class="button product-title">Order</a></div>
+    {{else}}
+        <h3>No Lamb Doners</h3>
+    {{/each}}
+</div>
+<br><br>
+
+</div>

@@ -1,0 +1,82 @@
+<div *ngIf="loader" class="loader">
+  <ul class="hexagon-container">
+    <li class="hexagon hex_1"></li>
+    <li class="hexagon hex_2"></li>
+    <li class="hexagon hex_3"></li>
+    <li class="hexagon hex_4"></li>
+    <li class="hexagon hex_5"></li>
+    <li class="hexagon hex_6"></li>
+    <li class="hexagon hex_7"></li>
+  </ul>
+</div>
+<div class="tile-group"  *ngIf="!loader">
+  <div class="tile-group-header">
+    <h1 class="section-header pull-left">Recently Uploaded Images</h1>
+  </div>
+
+  <div class="tile-group-inner">
+
+    <a *ngFor="let article of articles  | paginate: { itemsPerPage: 6, currentPage: p }" class="tile"
+       [style.background-image]="'url(' + article?.image + ')'" (click)="countClicks($event); details(article?._id) "  routerLink="/details/{{article?._id}}">
+
+      <div class="tile--content-wrap">
+        <div class="tile--content"><p class="tile--date">{{calcTime(article._kmd['lmt'])}} ago</p>
+          <h2 class="">{{article?.title}}</h2>
+        </div>
+        <button class="btn tile--btn btn--default shiny">Details</button>
+      </div>
+
+      <div class="tile-bg"></div>
+    </a>
+  </div>
+
+
+  <div class="pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+<hr *ngIf="!loader" class="hor-line">
+
+<div *ngIf="!loader" class="tile-group">
+  <div class="tile-group-header">
+    <h1 class="section-header pull-left">Most Viewed Images</h1>
+  </div>
+
+  <div class="tile-group-inner">
+    <a *ngFor="let article of viewsArticles" class="tile"
+       [style.background-image]="'url(' + article?.image + ')'" (click)="countClicks($event); details(article?._id)">
+
+
+      <div class="tile--content-wrap">
+        <div class="tile--content">
+          <p *ngIf="article.counter > 0" class="tile--date">{{article.counter}} views</p>
+          <p *ngIf="article.counter === 0" class="tile--date">No views yet</p>
+          <p class="tile--date">{{calcTime(article._kmd['lmt'])}} ago</p>
+          <h2 class="">{{article.title}}</h2>
+        </div>
+        <button class="btn tile--btn btn--default shiny">Details</button>
+      </div>
+
+      <div class="tile-bg"></div>
+    </a>
+  </div>
+
+  <div class="pagination"></div>
+
+  <!--<iframe-->
+    <!--src="http://player.twitch.tv/?channel=trick2g&muted=false"-->
+    <!--height="630"-->
+    <!--width="1120"-->
+    <!--frameborder="0"-->
+    <!--scrolling="no"-->
+    <!--allowfullscreen="true"-->
+  <!--style="margin-top: 20px;">-->
+  <!--</iframe>-->
+
+</div>
+
+<!--http://player.twitch.tv/?channel=trick2g&muted=false-->
+
+
+

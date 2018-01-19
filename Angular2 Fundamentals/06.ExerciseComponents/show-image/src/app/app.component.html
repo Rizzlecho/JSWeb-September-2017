@@ -1,0 +1,9 @@
+<div class="header">
+  <app-headers (selection)="showDetails($event)" *ngFor="let article of data" [incomingArticle]="article">
+
+  </app-headers>
+</div>
+
+<div *ngIf="selectedArticle" class="article">
+  <app-article [article]="selectedArticle"></app-article>
+</div>

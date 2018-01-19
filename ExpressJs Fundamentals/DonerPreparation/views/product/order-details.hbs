@@ -1,0 +1,41 @@
+<h1>Order details</h1>
+<div class="catalog">
+    <div class="column">
+        <img src="{{order.product.imageUrl}}">
+    </div>
+    <div class="column">
+        <h1 style="text-transform: capitalize">{{order.product.category}} doner, {{order.product.size}}cm</h1>
+        <h3 style="text-transform: capitalize">From 22.Oct 2017 10:35</h3><br>
+        <div style="text-transform: capitalize" class="toppings">
+            {{#each order.selectedToppings}}
+                {{this}} <br>
+            {{else}}
+                <p>No toppings</p>
+            {{/each}}
+        </div>
+    </div>
+    <div class="status">
+        <div class="status-block">
+            <span class="progress-right"></span>
+            <span class="checkpoint {{#if order.pending}}current{{/if}}"></span>
+            <br> Pending
+        </div>
+        <div class="status-block">
+            <span class="progress-left"></span>
+            <span class="progress-right"></span>
+            <span class="checkpoint {{#if order.inProgress}}current{{/if}}"></span>
+            <br> In progress
+        </div>
+        <div class="status-block">
+            <span class="progress-left"></span>
+            <span class="progress-right"></span>
+            <span class="checkpoint {{#if order.inTransit}}current{{/if}}"></span>
+            <br> In transit
+        </div>
+        <div class="status-block">
+            <span class="progress-left"></span>
+            <span class="checkpoint {{#if order.delivered}}current{{/if}}"></span>
+            <br> Delivered
+        </div>
+    </div>
+</div>

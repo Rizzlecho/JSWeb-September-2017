@@ -1,0 +1,40 @@
+<div *ngIf="loader" class="loader">
+  <ul class="hexagon-container">
+    <li class="hexagon hex_1"></li>
+    <li class="hexagon hex_2"></li>
+    <li class="hexagon hex_3"></li>
+    <li class="hexagon hex_4"></li>
+    <li class="hexagon hex_5"></li>
+    <li class="hexagon hex_6"></li>
+    <li class="hexagon hex_7"></li>
+  </ul>
+</div>
+<div class="tile-group" *ngIf="!loader">
+  <div class="tile-group-header">
+    <h1 class="section-header pull-left">{{categoryFilter}}</h1>
+  </div>
+
+  <div class="tile-group-inner">
+
+    <a *ngFor="let article of articles  | paginate: { itemsPerPage: 6, currentPage: p }" class="tile" [style.background-image]="'url(' + article?.image + ')'" (click)="countClicks($event); details(article?._id)">
+
+
+      <div class="tile--content-wrap">
+        <div class="tile--content"><p class="tile--date">{{calcTime(article._kmd['lmt'])}} ago</p>
+          <h2 class="">{{article?.title}}</h2>
+        </div>
+        <button class="btn tile--btn btn--default shiny">Details</button>
+      </div>
+
+      <div class="tile-bg"></div>
+    </a>
+    <h2 *ngIf="articles.length < 1">No images in this category.</h2>
+  </div>
+
+
+  <div *ngIf="articles.length > 0" class="pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+

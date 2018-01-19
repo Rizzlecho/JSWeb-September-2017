@@ -1,0 +1,16 @@
+<div class="login-page">
+  <div class="form">
+    <div class="row header">
+      <div class="large-12 columns">LOGIN</div>
+    </div>
+    <div *ngIf="loginFail" class="shiny btn-delete" style="margin-top: 20px;">Login Failed!</div>
+    <form class="login-form" (ngSubmit)="submit()" [formGroup]="login">
+      <input type="text" placeholder="Username" formControlName="username" />
+      <input type="password" placeholder="Password" formControlName="password" />
+      <button type="submit" class="btn btn--default shiny btn-login">login</button>
+      <p class="message">Not registered? <a routerLink="/register">Create an account</a></p>
+    </form>
+
+  </div>
+
+</div>

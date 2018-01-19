@@ -1,0 +1,30 @@
+<div class="heading">
+  <h1>Admin Panel</h1>
+  <hr>
+</div>
+
+<div class="login-page">
+  <div class="form  upload-form">
+    <div class="row header">
+      <div class="large-12 columns">Categories</div>
+    </div>
+
+    <form (ngSubmit)="createCategory()" [formGroup]="createNewCategory" class="login-form">
+      <label for="title">Add Category</label>
+      <input formControlName="category" id="title" type="text" placeholder="Name"/>
+
+      <button type="submit" class="btn btn--default shiny btn-login">Create</button>
+    </form>
+
+    <div class="login-form">
+      <label for="select">Delete Category</label>
+      <select (change)="onChange($event.target.value)"  name="category" id="select">
+        <option value="category" class="option" disabled selected>choose a category</option>
+        <option value={{category}} *ngFor="let category of categoriesArr">{{category}}</option>
+      </select>
+
+      <button class="btn-delete shiny del-category" type="submit" (click)="deleteCategory()">Delete</button>
+    </div>
+
+  </div>
+</div>

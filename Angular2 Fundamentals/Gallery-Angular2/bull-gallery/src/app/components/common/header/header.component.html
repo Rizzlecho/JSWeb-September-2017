@@ -1,0 +1,53 @@
+<nav>
+  <ul class="nav-bar">
+    <li class="left"><img routerLink="/" class="avatar" src="../../../../assets/images/bull-logo.png"
+                          style="margin: 0 10px 20px 0 ; width: 60px;"/></li>
+    <li class="left"><a class="active" routerLink="/">Home</a></li>
+    <li class="left">
+      <a  class="dropdown">Categories</a>
+      <div class="dropdown-content">
+        <a *ngFor="let category of categoriesArr" (click)="clickCategory(category)" >{{category}}</a>
+      </div>
+    </li>
+
+
+    <li *ngIf="loggedIn()" class="right"><img (click)="dropdown2($event)" class="avatar dropdown2" src={{avatar}}></li>
+    <li *ngIf="loggedIn()" class="right"><a (click)="dropdown2($event)" class="dropdown2">{{username}}</a>
+      <!--OPTIONAL DROPDOWN-->
+      <div class="dropdown-content dropdown-content2">
+        <a routerLink="/profile">Profile</a>
+        <a (click)="logout()">Logout</a>
+      </div>
+    </li>
+    <!--<li *ngIf="loggedIn()" class="right"><a (click)="logout()">Logout</a></li>-->
+    <li *ngIf="!loggedIn()" class="right"><a routerLink="/login">Login</a></li>
+    <li *ngIf="!loggedIn()" class="right"><a routerLink="/register">Register</a></li>
+    <li *ngIf="isAdmin() && loggedIn()"  class="right"><a routerLink="/admin">Admin</a></li>
+
+    <li class="right upload shiny"><a routerLink="/upload">Upload</a></li>
+  </ul>
+
+
+  <div id="nav-icon4">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul class="mobile-menu">
+    <li><a routerLink="/">Home</a></li>
+    <li>
+      <a class="mobile-dropdown">Categories</a>
+      <div class="mobile-dropdown-content">
+        <a *ngFor="let category of categoriesArr" (click)="clickCategory(category)">{{category}}</a>
+      </div>
+    </li>
+    <li *ngIf="loggedIn()"><a (click)="logout()">Logout</a></li>
+    <li *ngIf="!loggedIn()"><a routerLink="/login">Login</a></li>
+    <li *ngIf="!loggedIn()"><a routerLink="/register">Register</a></li>
+    <li *ngIf="loggedIn()"><a routerLink="/profile">{{username}}</a></li>
+    <li *ngIf="isAdmin() && loggedIn()"><a routerLink="/admin">Admin</a></li>
+    <li class="shiny"><a routerLink="/upload">Upload</a></li>
+  </ul>
+
+</nav>
+

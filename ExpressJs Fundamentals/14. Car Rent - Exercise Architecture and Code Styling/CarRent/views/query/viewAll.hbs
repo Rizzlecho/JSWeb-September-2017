@@ -1,0 +1,22 @@
+{{#each data}}
+    <a href="details/{{this._id}}">
+    <p>{{this.mark}}</p>
+    <p>{{this.model}}</p>
+    <img src="{{this.image}}" alt="car">
+    <p>{{this.year}}</p>
+    <p>Rent: {{this.pricePerDay}}&dollar;</p>
+    </a>
+    <br><br>
+
+{{else}}
+
+    <h1>No cars added on page {{page.nextPage}}</h1>
+{{/each}}
+<br>
+
+<div class="page-container">
+<button><a href="viewAll?page={{page.prevPage}}">Prev</a></button>
+<span class="page-count">{{page.nextPage}}</span>
+<button><a href="viewAll?page={{page.nextPage}}">Next</a></button>
+</div>
+<br><br>
