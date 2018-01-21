@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
-import {getPostsByCategory} from "../../../api/remote";
+import {getAllPosts, getCategories, getPostsByCategory} from "../../../api/remote";
 import toastr from 'toastr';
 
 
@@ -10,31 +10,60 @@ class SortByCategory extends Component {
 
         this.state = {
             articles: [],
+            categories: [],
+            category: 'All Images',
+            loader: true,
         };
 
         this.calcTime = this.calcTime.bind(this);
+        this.onChangeHandler = this.onChangeHandler.bind(this);
     }
+
+    async onChangeHandler(e) {
+
+        // GET ALL POSTS
+        this.setState({[e.target.name]: e.target.value});
+
+        if(e.target.value === 'All Images'){
+            this.getData();
+            return
+        }
+
+        // GET POSTS BY CATEGORY
+        const res = await getPostsByCategory(e.target.value);
+        if (res.error) {
+            toastr.error('Loading unsuccessful');
+            return;
+        }
+
+        this.setState({articles: res});
+    }
+
 
     componentDidMount() {
         this.getData();
     }
 
     async getData() {
-
-        // GET POSTS BY CATEGORY
-        const res = await getPostsByCategory(this.props.match.params.category);
+        // GET ALL POSTS
+        const res = await getAllPosts();
+        this.setState({loader: false});
         if (res.error) {
             toastr.error('Loading unsuccessful');
             return;
         }
-        toastr.success('Posts Loaded Successfully');
 
         this.setState({articles: res});
 
-        // window.location.reload();
-        // this.props.history.push('/');
-        // this.props.history.push(`/${this.props.match.params.category}`);
 
+        // GETTING CATEGORIES AND PUSHING THEM INTO ARRAY
+        let arrCategories = [];
+        const resCategories = await getCategories();
+
+        for (let obj in resCategories) {
+            arrCategories.push(resCategories[obj]['category']);
+        }
+        this.setState({categories: arrCategories});
 
 
     }
@@ -67,10 +96,28 @@ class SortByCategory extends Component {
             <div>
                 <div className="tile-group">
                     <div className="tile-group-header">
-                        <h1 className="section-header pull-left">{this.props.match.params.category}</h1>
+                        <h1 className="section-header pull-left">{this.state.category}</h1>
+
+                        <select onChange={this.onChangeHandler}  name="category" className="select-category">
+                            <option value="All Images" className="option">All Images</option>
+                            {this.state.categories.map((category, index) => {
+                                return (
+                                    <option value={category} key={index}>{category}</option>
+                                )
+                            })}
+                        </select>
                     </div>
 
                     <div className="tile-group-inner">
+                        {this.state.loader ? <div style={{border: 'solid rgb(28, 33, 43)'}} className="tile-group-inner">
+                            <div className="spinner">
+                                <div className="rect1"/>
+                                <div className="rect2"/>
+                                <div className="rect3"/>
+                                <div className="rect4"/>
+                                <div className="rect5"/>
+                            </div>
+                        </div> : <span/>}
 
                         {[...this.state.articles].map((article, index) => {
                             return (
@@ -90,7 +137,8 @@ class SortByCategory extends Component {
                             )
                         })}
 
-                        {this.state.articles.length === 0 ? <h1>No images in this category.</h1>: <span/>}
+                        {!this.state.loader ? this.state.articles.length === 0 ? <h1>No images in this category.</h1>: <span/> : <span/>}
+
 
                     </div>
 

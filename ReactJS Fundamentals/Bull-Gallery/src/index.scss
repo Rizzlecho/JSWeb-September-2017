@@ -3,6 +3,7 @@
 // VARIABLES
 $lightBlue: #42b6ff;
 $blackBlue: rgba(2, 9, 23, 0.95);
+$Lato: Lato, Helvetica Neue, Arial, sans-serif;
 
 html {
   box-sizing: border-box;
@@ -21,7 +22,7 @@ body, html {
 }
 
 body {
-  font-family: Lato, Helvetica Neue, Arial, sans-serif;
+  font-family: $Lato;
   font-weight: 300;
   background-color: #171c25;
 }
@@ -132,7 +133,7 @@ nav ul li a {
   text-decoration: none;
   font-size: 20px;
   padding: 10px 10px 23px 10px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 
 }
 
@@ -370,6 +371,10 @@ h1.section-header {
 .tile-group-inner {
   margin-left: -0.5em;
   margin-right: -0.5em;
+  min-height: 53rem;
+  border-radius: 4px;
+  position: relative;
+  //border: 1px solid red;
 }
 
 .tile {
@@ -411,6 +416,8 @@ h1.section-header {
   bottom: 0;
   transform: translateY(30px);
   transition: transform 0.25s, opacity 0.25s;
+  font-family: $Lato;
+
 }
 
 .tile {
@@ -562,7 +569,7 @@ h1.section-header {
 
 textarea {
   &::placeholder {
-    font-family: Lato, Helvetica Neue, Arial, sans-serif;
+    font-family: $Lato;
   }
 }
 
@@ -579,7 +586,13 @@ textarea {
       float: right;
     }
   }
-
+  .comments-wrapper {
+    max-width: 600px;
+    min-height: 10rem;
+    //border: 1px solid red;
+    border-radius: 4px;
+    position: relative;
+  }
 }
 
 .text-area {
@@ -592,7 +605,7 @@ textarea {
   background: rgba(40, 50, 68, 0.97);
   border-radius: 2px;
   border: 1px solid transparent;
-  font-family: Lato, Helvetica Neue, Arial, sans-serif;
+  font-family: $Lato;
   font-weight: 400;
   font-size: 17px;
   display: block;
@@ -713,6 +726,13 @@ textarea {
   }
 }
 
+.mobile-logo {
+  display: none;
+  float: right;
+  margin-top: -50px;
+  text-decoration: none;
+}
+
 /*====== END HAMBURGER ======*/
 
 /*====== FORMS ======*/
@@ -811,13 +831,13 @@ textarea {
     font-size: 16px;
     border-left: 3px solid transparent;
     transition: all 0.2s ease;
-    font-family: Lato, Helvetica Neue, Arial, sans-serif;
+    font-family: $Lato;
     &:focus {
       border-left: 3px solid white;
     }
     &::placeholder {
       color: #cacaca;
-      font-family: Lato, Helvetica Neue, Arial, sans-serif;
+      font-family: $Lato;
     }
   }
   #title, #description, #image {
@@ -844,6 +864,22 @@ textarea {
   max-width: 600px;
   margin-bottom: 120px;
   margin-top: -30px;
+}
+
+.select-category {
+  float: right;
+  color: white;
+  border-radius: 3px;
+  width: 320px;
+  outline: 0;
+  background: rgba(91, 98, 115, 0.97);
+  border: 0;
+  margin: 19px 12px 10px 0;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
 }
 
 
@@ -922,6 +958,11 @@ textarea {
 
 }
 
+
+.error {
+  min-height: 50rem;
+}
+
 /*====== FOOTER ======*/
 
 .footer {
@@ -955,6 +996,10 @@ textarea {
 }
 
 @media screen and (max-width: 768px) {
+  .mobile-logo {
+    display: block;
+  }
+
   .tile {
     width: 100%;
   }
@@ -1008,6 +1053,7 @@ textarea {
     textarea {
       width: 99%;
     }
+
   }
 }
 
@@ -1029,172 +1075,108 @@ textarea {
 
 //PRELOADER
 
-.loader {
-  position: fixed;
-  z-index: 3;
-  transform: scale(0.4);
-  top: 50%;
-  left: 50%;
-  width: 160px;
-  height: 160px;
-  margin: -80px 0px 0px -80px;
-  background-color: transparent;
-  border-radius: 50%;
-  border: 2px solid #E3E4DC;
-  // animation: rotate3 3s linear infinite;
-  &:before {
-    content: '';
-    width: 164px;
-    height: 164px;
-    display: block;
-    position: absolute;
-    border: 2px solid #898a86;
-    border-radius: 50%;
-    top: -2px;
-    left: -2px;
-    box-sizing: border-box;
-    // border-bottom-color: transparent;
-    // border-left-color: transparent;
-    // border-right-color: transparent;
-    clip: rect(0px, 35px, 35px, 0px);
-    z-index: 10;
-    animation: rotate infinite;
-    animation-duration: 3s;
-    animation-timing-function: linear;
+.spinner {
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  position: ABSOLUTE;
+  font-size: 10px;
+  top: 46%;
+  left: 47%;
+
+}
+
+.spinner > div {
+  background: #556C82;
+  margin-left:2px;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+.comment-spinner{
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  position: ABSOLUTE;
+  font-size: 10px;
+  top: 36%;
+  left: 45%;
+
+  &>div {
+    background: #556C82;
+    margin-left:2px;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
   }
-  &:after {
-    content: '';
-    width: 164px;
-    height: 164px;
-    display: block;
-    position: absolute;
-    border: 2px solid #c1bebb;
-    border-radius: 50%;
-    top: -2px;
-    left: -2px;
-    box-sizing: border-box;
-    // transform: rotate(30deg);
-    // border-bottom-color: transparent;
-    // border-left-color: transparent;
-    // border-right-color: transparent;
-    clip: rect(0px, 164px, 150px, 0px);
-    z-index: 9;
-    // animation: rotate2 infinite, rotate3 infinite;
-    // animation-duration: 3s;
-    // animation-timing-function: linner;
-    animation: rotate2 3s linear infinite;
+  .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+  }
+
+  .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+
+  .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+  }
+
+  .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
   }
 }
 
-.hexagon-container {
-  position: relative;
-  top: 33px;
-  left: 41px;
-  border-radius: 50%;
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+  20% { -webkit-transform: scaleY(1.0) }
 }
 
-.hexagon {
-  position: absolute;
-  width: 40px;
-  height: 23px;
-  background-color: #556C82;
-  &:before {
-    content: "";
-    position: absolute;
-    top: -11px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 11.5px solid #556C82;
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    top: 23px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 11.5px solid #556C82;
-  }
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+       transform: scaleY(1.0);
+       -webkit-transform: scaleY(1.0);
+     }
 }
 
-@each $index,
-$top,
-$left in (1, 0px, 0px),
-        (2, 0px, 42px),
-        (3, 36px, 63px),
-        (4, 72px, 42px),
-        (5, 72px, 0px),
-        (6, 36px, -21px),
-        (7, 36px, 21px) {
-  $time: 3s; // thx to @zeakd for this formula
-  $delay: $time / 14;
-  .hexagon.hex_#{$index} {
-    top: $top;
-    left: $left;
-    //cubic-bezier(.155,1.105,.295,1.12)
-    animation: Animasearch $time ease-in-out infinite;
-    animation-delay: $delay*$index;
-  }
-}
 
-@keyframes Animasearch {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  15%,
-  50% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  65% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
 
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
-    clip: rect(0px, 35px, 35px, 0px);
-  }
-  50% {
-    clip: rect(0px, 40px, 40px, 0px);
-  }
-  100% {
-    transform: rotate(360deg);
-    clip: rect(0px, 35px, 35px, 0px);
-  }
-}
 
-@keyframes rotate2 {
-  0% {
-    transform: rotate(0deg);
-    clip: rect(0px, 164px, 150px, 0px);
-  }
-  50% {
-    clip: rect(0px, 164px, 0px, 0px);
-    transform: rotate(360deg);
-  }
-  100% {
-    transform: rotate(720deg);
-    clip: rect(0px, 164px, 150px, 0px);
-  }
-}
 
-@keyframes rotate3 {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+
 
 .more {
   position: absolute;

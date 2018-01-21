@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {
     getCommentsOfPost, getPostDetails, postComment, deleteComment, deletePost,
-    deleteCommentsOfPost
+    deleteCommentsOfPost, getDetailsOfUser
 } from "../../../api/remote";
 import toastr from 'toastr';
 
@@ -21,7 +21,9 @@ class Details extends Component {
             counter: '',
             lmt: '',
             comments: [],
-            commentText: ''
+            commentText: '',
+            imgLoader: true,
+            commentLoader: true,
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -36,11 +38,10 @@ class Details extends Component {
     }
 
     async getData() {
-        console.log(this.props.match.params.id);
 
         // GET POST DETAILS
         const res = await getPostDetails(this.props.match.params.id);
-
+        this.setState({imgLoader: false});
         if (res.error) {
             toastr.error('Loading unsuccessful');
             return;
@@ -53,20 +54,39 @@ class Details extends Component {
             description: res.description,
             creator: res.creator,
             counter: res.counter,
-            lmt: res._kmd.lmt,
+            lmt: res._kmd.ect,
         });
         this.setState({username: localStorage.getItem('username')});
 
+
         // GET COMMENTS FOR POST
         const resComments = await getCommentsOfPost(this.props.match.params.id);
+        this.setState({commentLoader: false});
+
+        let commentsWithAvatars = [];
+
+        // GET COMMENT INFO WITH UPDATED AVATARS
+        for (let obj of resComments) {
+            const res = await getDetailsOfUser(obj.username);
+
+            let commentObj = {
+                username: obj.username,
+                comment: obj.comment,
+                postId: obj.postId,
+                lmt: obj._kmd.ect,
+                userAvatar: res[0].avatar
+            };
+
+            commentsWithAvatars.push(commentObj);
+        }
+
+        this.setState({comments: commentsWithAvatars});
 
         if (resComments.success === false) {
             toastr.error('Loading comments unsuccessful');
             return;
         }
 
-        this.setState({comments: resComments});
-        console.log(this.state.comments);
 
     }
 
@@ -77,15 +97,16 @@ class Details extends Component {
     async onSubmitHandler(e) {
         e.preventDefault();
 
+        // POST COMMENT
         const resComment = await postComment(this.state.username, this.state.commentText, this.props.match.params.id);
 
         if (resComment.success === false) {
             toastr.error('Commenting unsuccessful');
             return;
         }
-
         this.refs.form.reset();
         console.log(resComment);
+
 
         // LOAD COMMENTS AFTER COMMENTING
         const resComments = await getCommentsOfPost(this.props.match.params.id);
@@ -118,7 +139,7 @@ class Details extends Component {
         console.log(this.state.comments);
     }
 
-    async deletePostById(id){
+    async deletePostById(id) {
         const resDeletePost = await deletePost(id);
         const resDelete = await deleteCommentsOfPost(id);
         if (resDelete.success === false) {
@@ -149,7 +170,6 @@ class Details extends Component {
         }
     }
 
-
     render() {
         return (
             <main>
@@ -162,7 +182,8 @@ class Details extends Component {
 
                         <div className="responsive-details">
                             <p className="details-p-left">
-                                <span>{this.state.creator}</span> in {this.state.category}&ensp;- {this.calcTime(this.state.lmt)} ago</p>
+                                <span>{this.state.creator}</span> in {this.state.category}&ensp;- {this.calcTime(this.state.lmt)} ago
+                            </p>
                             <p className="details-p-right">{this.state.counter} views</p>
 
                             <h3>Description</h3>
@@ -177,15 +198,25 @@ class Details extends Component {
 
 
                     <div className="responsive-details">
-
+                        {this.state.imgLoader ? <div>
+                            <div className="spinner">
+                                <div className="rect1"/>
+                                <div className="rect2"/>
+                                <div className="rect3"/>
+                                <div className="rect4"/>
+                                <div className="rect5"/>
+                            </div>
+                        </div> : <span/>}
                         {/* PROPERTIES */}
                         <div className="properties">
 
                             <button className="btn btn--default shiny btn-download"><a href={this.state.image}
                                                                                        download>Download</a></button>
                             {this.state.creator === localStorage.getItem('username') ? <span>
-                                    <button className="btn btn--default shiny btn-edit">Edit</button>
-                                    <button onClick={()=>{this.deletePostById(this.props.match.params.id)}} className="btn btn--default shiny btn-delete">Delete</button>
+                                <Link to={`/edit/${this.props.match.params.id}`}><button className="btn btn--default shiny btn-edit">Edit</button></Link>
+                                    <button onClick={() => {
+                                        this.deletePostById(this.props.match.params.id)
+                                    }} className="btn btn--default shiny btn-delete">Delete</button>
                                 </span> : <span/>}
 
                         </div>
@@ -201,23 +232,40 @@ class Details extends Component {
                                 <button type="submit" className="btn btn--default shiny btn-edit">Submit</button>
                             </form>
 
-                            {this.state.comments.map((comment, index) => {
-                                return (
-                                    <span key={index}>
+
+
+                            <div className="comments-wrapper">
+                                {this.state.commentLoader ? <div  className="comments-wrapper">
+                                    <div className="comment-spinner">
+                                        <div className="rect1"/>
+                                        <div className="rect2"/>
+                                        <div className="rect3"/>
+                                        <div className="rect4"/>
+                                        <div className="rect5"/>
+                                    </div>
+                                </div> : <span/>}
+
+                                {this.state.comments.map((comment, index) => {
+                                    return (
+                                        <span key={index}>
                                         <div className="comment">
                                         <span>
                                            {comment.username === localStorage.getItem('username') ?
-                                               <span onClick={()=>{this.deleteCmt(comment._id)}} className="hiks">delete</span> : <span/>}
+                                               <span onClick={() => {
+                                                   this.deleteCmt(comment._id)
+                                               }} className="hiks">delete</span> : <span/>}
                                         </span>
-                                        <p className="uploaded-by"><img src={comment.userAvatar} alt="rizz"/><span className="commentator">{comment.username}</span>&ensp;{this.calcTime(comment._kmd.lmt)} ago</p>
+                                        <p className="uploaded-by"><img src={comment.userAvatar} alt="rizz"/><span
+                                            className="commentator">{comment.username}</span>&ensp;{this.calcTime(comment.lmt)} ago</p>
                                         <p>{comment.comment}</p>
                                         </div>
                                     </span>
-                                )
-                            })}
+                                    )
+                                })}
 
-                            {this.state.comments.length === 0 ? <p>No comments yet.</p> : <span/>}
+                                {!this.state.commentLoader ? this.state.comments.length === 0 ?  <p>No comments yet.</p>: <span/> : <span/>}
 
+                            </div>
                         </div>
 
                     </div>

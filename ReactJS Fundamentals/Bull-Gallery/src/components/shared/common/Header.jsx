@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withRouter, NavLink} from 'react-router-dom';
+import {withRouter, NavLink, Link} from 'react-router-dom';
 import logo from './images/logo.png'
 import * as $ from 'jquery';
 import {getUserDetails, getCategories} from "../../../api/remote";
@@ -13,15 +13,10 @@ class Header extends Component {
             categories: []
         };
 
-        this.dropdownCategory = this.dropdownCategory.bind(this);
         this.dropdownProfile = this.dropdownProfile.bind(this);
         this.dropdownMobileMenu = this.dropdownMobileMenu.bind(this);
-        this.dropdownMobileCategory = this.dropdownMobileCategory.bind(this);
     }
 
-    dropdownCategory() {
-        $('.dropdown').next('.dropdown-content').slideToggle('fast');
-    }
 
     dropdownProfile() {
         $('.dropdown2').next('.dropdown-content2').slideToggle('fast');
@@ -31,10 +26,6 @@ class Header extends Component {
         $('#nav-icon4').toggleClass('open');
         $('#nav-icon4').next('.mobile-menu').slideToggle('fast');
 
-    }
-
-    dropdownMobileCategory() {
-        $('.mobile-dropdown').next('.mobile-dropdown-content').slideToggle('fast');
     }
 
     async componentDidMount() {
@@ -68,17 +59,17 @@ class Header extends Component {
                             <img className="logo" src={logo} alt="logo"/>
                         </li>
                         <li className="left"><NavLink to={'/'}>Home</NavLink></li>
-                        <li className="left" onClick={this.dropdownCategory}>
-                            <a className="dropdown">Categories</a>
-                            <div className="dropdown-content">
-                                {this.state.categories.map((category, index) => {
-                                    return (
-                                        <NavLink to={`/category/${category}`}
-                                                 key={index}><span>{category}</span></NavLink>
-                                    )
-                                })}
+                        <li className="left">
+                            <NavLink to={`/categories`} className="dropdown">Categories</NavLink>
+                            {/*<div className="dropdown-content">*/}
+                                {/*{this.state.categories.map((category, index) => {*/}
+                                    {/*return (*/}
+                                        {/*<Link to={`/categories`}*/}
+                                              {/*key={index}><span>{category}</span></Link>*/}
+                                    {/*)*/}
+                                {/*})}*/}
 
-                            </div>
+                            {/*</div>*/}
                         </li>
 
 
@@ -101,6 +92,7 @@ class Header extends Component {
                         <li className="right"><NavLink to={'/register'}>Register</NavLink></li>}
                         {this.props.loggedIn() && <li className="right"><NavLink to={'/admin'}>Admin</NavLink></li>}
                         <li className="right upload shiny"><NavLink to={'/upload'}>Upload</NavLink></li>
+
                     </ul>
 
 
@@ -112,27 +104,30 @@ class Header extends Component {
                     </div>
 
                     <ul className="mobile-menu">
-                        <li><NavLink to={'/'}>Home</NavLink></li>
-                        <li onClick={this.dropdownMobileCategory}>
-                            <a className="mobile-dropdown">Categories</a>
-                            <div className="mobile-dropdown-content">
-                                {this.state.categories.map((category, index) => {
-                                    return (
-                                        <NavLink to={`/category/${category}`}
-                                                 key={index}><span>{category}</span></NavLink>
-                                    )
-                                })}
-                            </div>
+                        <li><Link to={'/'}>Home</Link></li>
+                        <li>
+                            <Link to={`/categories`} className="mobile-dropdown">Categories</Link>
+                            {/*<div className="mobile-dropdown-content">*/}
+                                {/*{this.state.categories.map((category, index) => {*/}
+                                    {/*return (*/}
+                                        {/*<Link to={`/category/${category}`}*/}
+                                                 {/*key={index}><span>{category}</span></Link>*/}
+                                    {/*)*/}
+                                {/*})}*/}
+                            {/*</div>*/}
                         </li>
 
-                        {!this.props.loggedIn() && <li><NavLink to={'/login'}>Login</NavLink></li>}
-                        {!this.props.loggedIn() && <li><NavLink to={'/register'}>Register</NavLink></li>}
-                        {this.props.loggedIn() && <li><NavLink to={'/admin'}>Admin</NavLink></li>}
-                        {this.props.loggedIn() && <li><NavLink to={'/profile'}>{localStorage.getItem('username')}</NavLink></li>}
-                        {this.props.loggedIn() && <li><a href="javascript:void(0)" onClick={this.props.onLogout}>Logout</a></li>}
-                        {this.props.loggedIn() && <li className="shiny"><NavLink to={'/upload'}>Upload</NavLink></li>}
+                        {!this.props.loggedIn() && <li><Link to={'/login'}>Login</Link></li>}
+                        {!this.props.loggedIn() && <li><Link to={'/register'}>Register</Link></li>}
+                        {this.props.loggedIn() && <li><Link to={'/admin'}>Admin</Link></li>}
+                        {this.props.loggedIn() &&
+                        <li><Link to={'/profile'}>{localStorage.getItem('username')}</Link></li>}
+                        {this.props.loggedIn() &&
+                        <li><a href="javascript:void(0)" onClick={this.props.onLogout}>Logout</a></li>}
+                        {this.props.loggedIn() && <li className="shiny"><Link to={'/upload'}>Upload</Link></li>}
 
                     </ul>
+                    <Link className="mobile-logo" to={'/'}><h2>Bull Gallery</h2></Link>
                 </nav>
 
 

@@ -18,8 +18,9 @@ const postsByCategoryUrl = `${baseUrl}/appdata/${appKey}/posts?query=`;
 // COMMENTS URLs
 const postCommentUrl = `${baseUrl}/appdata/${appKey}/comments`;
 const getAllCommentsUrl = `${baseUrl}/appdata/${appKey}/comments?query=`;
+const getAvatarOfCommentUrl = `${baseUrl}/user/${appKey}?query=`;
 
-
+//
 // AUTH REQUESTS
 async function register(username, password, role, avatar) {
     const res = await fetch(`${registerUrl}`, {
@@ -116,6 +117,16 @@ async function getCommentsOfPost(postId) {
     return await res.json();
 }
 
+async function getDetailsOfUser(username) {
+    const res = await fetch(`${getAvatarOfCommentUrl}{"username":"${username}"}`, {
+        method: 'GET',
+        headers: {
+            Authorization: 'Kinvey ' + localStorage.getItem('token')
+        }
+    });
+    return await res.json();
+}
+
 async function getPostsByCategory(category) {
     const res = await fetch(`${postsByCategoryUrl}{"category": "${category}"}`, {
         method: 'GET',
@@ -180,6 +191,26 @@ async function editProfile(id,avatar) {
     return await res.json();
 }
 
+async function editPost(id, title, image, category, description, creator, counter, time) {
+    const res = await fetch(`${postsUrl}/${id}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: 'Kinvey ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: title,
+            image: image,
+            category: category,
+            description: description,
+            creator: creator,
+            counter: counter,
+            _kmd: time,
+        })
+    });
+    return await res.json();
+}
+
 
 // DELETE REQUESTS
 async function deletePost(postId) {
@@ -221,6 +252,7 @@ export {
     getAllPosts,
     getMostViewedPosts,
     getPostsByCategory,
+    getDetailsOfUser,
     postUpload,
     getPostDetails,
     getCommentsOfPost,
@@ -228,5 +260,6 @@ export {
     deleteComment,
     deletePost,
     deleteCommentsOfPost,
-    editProfile
+    editProfile,
+    editPost
 };

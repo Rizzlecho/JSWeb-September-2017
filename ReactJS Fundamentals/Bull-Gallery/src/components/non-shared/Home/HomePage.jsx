@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
 import {getAllPosts, getMostViewedPosts} from "../../../api/remote";
 import toastr from 'toastr';
+import ReactPaginate from 'react-paginate';
 
 
 class HomePage extends Component {
@@ -10,7 +11,8 @@ class HomePage extends Component {
 
         this.state = {
             articles: [],
-            mostViewedArticles: []
+            mostViewedArticles: [],
+            loader: true,
         };
 
         this.calcTime = this.calcTime.bind(this);
@@ -20,16 +22,17 @@ class HomePage extends Component {
         this.getData();
     }
 
+
     async getData() {
 
         // GET ALL POSTS
         const res = await getAllPosts();
 
+        this.setState({loader: false});
         if (res.error) {
             toastr.error('Loading unsuccessful');
             return;
         }
-        toastr.success('Posts Loaded Successfully');
 
         this.setState({articles: res});
 
@@ -71,21 +74,32 @@ class HomePage extends Component {
     render() {
         return (
             <div>
+
                 <div className="tile-group">
                     <div className="tile-group-header">
                         <h1 className="section-header pull-left">Recently Uploaded Images</h1>
                     </div>
 
                     <div className="tile-group-inner">
+                        {this.state.loader ? <div style={{border: 'solid rgb(28, 33, 43)'}} className="tile-group-inner">
+                            <div className="spinner">
+                                <div className="rect1"/>
+                                <div className="rect2"/>
+                                <div className="rect3"/>
+                                <div className="rect4"/>
+                                <div className="rect5"/>
+                            </div>
+                        </div> : <span/>}
+
 
                         {[...this.state.articles].map((article, index) => {
                             return (
                                 <NavLink key={index} className="tile" to={`/details/${article._id}`}
-                                   style={{backgroundImage: "url(" + `${article.image}` + ")"}}>
+                                         style={{backgroundImage: "url(" + `${article.image}` + ")"}}>
 
                                     <div className="tile--content-wrap">
                                         <div className="tile--content"><p
-                                            className="tile--date">{this.calcTime(article['_kmd']['lmt'])}</p>
+                                            className="tile--date">{this.calcTime(article['_kmd']['ect'])}</p>
                                             <h2 className="">{article.title}</h2>
                                         </div>
                                         <button className="btn tile--btn btn--default shiny">Details</button>
@@ -98,11 +112,14 @@ class HomePage extends Component {
 
                     </div>
 
+
+
                     <div className="pagination">
                         <p><span>&lt;</span><span>1</span><span>2</span><span>3</span><span>4</span><span>&gt;</span>
                         </p>
                     </div>
                 </div>
+
 
                 <hr className="hor-line"/>
 
@@ -112,12 +129,20 @@ class HomePage extends Component {
                     </div>
 
                     <div className="tile-group-inner">
-
+                        {this.state.loader ? <div style={{border: 'solid rgb(28, 33, 43)'}} className="tile-group-inner">
+                            <div className="spinner">
+                                <div className="rect1"/>
+                                <div className="rect2"/>
+                                <div className="rect3"/>
+                                <div className="rect4"/>
+                                <div className="rect5"/>
+                            </div>
+                        </div> : <span/>}
 
                         {[...this.state.mostViewedArticles].map((article, index) => {
                             return (
                                 <NavLink key={index} className="tile" to={`/details/${article._id}`}
-                                   style={{backgroundImage: "url(" + `${article.image}` + ")"}}>
+                                         style={{backgroundImage: "url(" + `${article.image}` + ")"}}>
 
                                     <div className="tile--content-wrap">
                                         <div className="tile--content">
