@@ -213,7 +213,7 @@ class Details extends Component {
                             <button className="btn btn--default shiny btn-download"><a href={this.state.image}
                                                                                        download>Download</a></button>
                             {this.state.creator === localStorage.getItem('username') ? <span>
-                                <Link to={`/edit/${this.props.match.params.id}`}><button className="btn btn--default shiny btn-edit">Edit</button></Link>
+                               <button className="btn btn--default shiny btn-edit"> <Link to={`/edit/${this.props.match.params.id}`}>Edit</Link></button>
                                     <button onClick={() => {
                                         this.deletePostById(this.props.match.params.id)
                                     }} className="btn btn--default shiny btn-delete">Delete</button>
