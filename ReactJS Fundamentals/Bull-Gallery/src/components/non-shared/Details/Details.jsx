@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {
     getCommentsOfPost, getPostDetails, postComment, deleteComment, deletePost,
-    deleteCommentsOfPost, getDetailsOfUser
+    deleteCommentsOfPost, getDetailsOfUser, editPost
 } from "../../../api/remote";
 import toastr from 'toastr';
 
@@ -58,6 +58,17 @@ class Details extends Component {
         });
         this.setState({username: localStorage.getItem('username')});
 
+        // PUT REQUEST FOR COUNTER
+        const resCounter = await editPost(
+            this.props.match.params.id,
+            this.state.title,
+            this.state.image,
+            this.state.category,
+            this.state.description,
+            this.state.creator,
+            this.state.counter + 1,
+            this.state.time
+        );
 
         // GET COMMENTS FOR POST
         const resComments = await getCommentsOfPost(this.props.match.params.id);

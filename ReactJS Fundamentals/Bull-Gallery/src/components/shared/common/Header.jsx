@@ -90,7 +90,7 @@ class Header extends Component {
                         {!this.props.loggedIn() && <li className="right"><NavLink to={'/login'}>Login</NavLink></li>}
                         {!this.props.loggedIn() &&
                         <li className="right"><NavLink to={'/register'}>Register</NavLink></li>}
-                        {this.props.loggedIn() && <li className="right"><NavLink to={'/admin'}>Admin</NavLink></li>}
+                        {this.props.isAdmin() && <li className="right"><NavLink to={'/admin'}>Admin</NavLink></li>}
                         <li className="right upload shiny"><NavLink to={'/upload'}>Upload</NavLink></li>
 
                     </ul>

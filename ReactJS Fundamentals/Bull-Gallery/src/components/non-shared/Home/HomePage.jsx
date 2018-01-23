@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
-import {getAllPosts, getMostViewedPosts} from "../../../api/remote";
+import {editPost, getAllPosts, getMostViewedPosts} from "../../../api/remote";
 import toastr from 'toastr';
 import ReactPaginate from 'react-paginate';
 
@@ -13,6 +13,14 @@ class HomePage extends Component {
             articles: [],
             mostViewedArticles: [],
             loader: true,
+
+            title: '',
+            image: '',
+            category: '',
+            description: '',
+            creator: '',
+            counter: 0,
+            time: '',
         };
 
         this.calcTime = this.calcTime.bind(this);
@@ -102,7 +110,7 @@ class HomePage extends Component {
                                             className="tile--date">{this.calcTime(article['_kmd']['ect'])}</p>
                                             <h2 className="">{article.title}</h2>
                                         </div>
-                                        <button className="btn tile--btn btn--default shiny">Details</button>
+                                        <button className="btn tile--btn btn--default shiny">Read More</button>
                                     </div>
 
                                     <div className="tile-bg"></div>
@@ -152,7 +160,7 @@ class HomePage extends Component {
                                             }
 
 
-                                            <p className="tile--date">{this.calcTime(article._kmd['lmt'])} ago</p>
+                                            <p className="tile--date">{this.calcTime(article._kmd['ect'])} ago</p>
                                             <h2 className="">{article.title}</h2>
                                         </div>
                                         <button className="btn tile--btn btn--default shiny">Details</button>

@@ -11,7 +11,9 @@ class Profile extends Component {
         this.state = {
             username: '',
             avatar: '',
-            id: ''
+            id: '',
+            role: '',
+            loader: true
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -26,14 +28,14 @@ class Profile extends Component {
 
         // GET USER DETAILS
         const res = await getUserDetails();
+        this.setState({loader: false});
         if (res.error) {
-            toastr.error('Loading unsuccessful');
+            toastr.error('Could not load profile');
             return;
         }
-        toastr.success('Posts Loaded Successfully');
 
 
-        this.setState({username: res[0].username, avatar: res[0].avatar, id: res[0]._id,});
+        this.setState({username: res[0].username, avatar: res[0].avatar, id: res[0]._id, role: res[0].role,});
         console.log(this.state);
     }
 
@@ -45,8 +47,8 @@ class Profile extends Component {
         e.preventDefault();
 
         // EDIT AVATAR
-        const res = await editProfile(this.state.id, this.state.avatar);
-        if(res.error){
+        const res = await editProfile(this.state.id, this.state.avatar, this.state.role);
+        if (res.error) {
             toastr.error('Edit unsuccessful');
             return;
         }
@@ -68,11 +70,24 @@ class Profile extends Component {
 
                         <form onSubmit={this.onSubmitHandler} className="login-form">
                             <div className="login-form">
-                                <img src={this.state.avatar} alt="img"/>
+
+                                {this.state.loader ?
+                                    <div className="avatar-wrapper">
+                                        <div className="avatar-spinner">
+                                            <div className="rect1"/>
+                                            <div className="rect2"/>
+                                            <div className="rect3"/>
+                                            <div className="rect4"/>
+                                            <div className="rect5"/>
+                                        </div>
+                                    </div> : <img src={this.state.avatar} alt="img"/>}
+
+
                                 <label htmlFor="avatar">Choose Avatar</label>
                                 <input onChange={this.onChangeHandler} id="avatar" name="avatar" type="text"
                                        placeholder=""
                                        value={this.state.avatar}/>
+
                             </div>
 
                             <div className="login-form">

@@ -129,7 +129,7 @@ class SortByCategory extends Component {
                                             className="tile--date">{this.calcTime(article['_kmd']['lmt'])}</p>
                                             <h2 className="">{article.title}</h2>
                                         </div>
-                                        <button className="btn tile--btn btn--default shiny">Details</button>
+                                        <button className="btn tile--btn btn--default shiny">Read More</button>
                                     </div>
 
                                     <div className="tile-bg"></div>

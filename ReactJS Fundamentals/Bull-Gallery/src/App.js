@@ -15,9 +15,12 @@ import Upload from "./components/non-shared/Upload/Upload";
 import Details from "./components/non-shared/Details/Details";
 import Profile from "./components/non-shared/Profile/Profile";
 import EditPost from "./components/non-shared/Edit/EditPost";
+import Admin from "./components/non-shared/Admin/Admin";
 
 import PrivateRoute from './api/PrivateRoute'
 import AuthedRoute from './api/AuthedRoute'
+import AdminRoute from "./api/AdminRoute";
+
 import Error from "./components/non-shared/Error/Error";
 
 class App extends Component {
@@ -32,6 +35,10 @@ class App extends Component {
 
     }
 
+    isAdmin(){
+        return localStorage.getItem('username') === 'Rizzle';
+    }
+
     onLogout() {
         localStorage.clear();
         this.props.history.push('/login');
@@ -40,7 +47,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Header loggedIn={this.isLoggedIn} onLogout={this.onLogout}/>
+                <Header loggedIn={this.isLoggedIn} onLogout={this.onLogout} isAdmin={this.isAdmin}/>
                 <Switch>
                     <PrivateRoute exact path="/" component={HomePage} />
                     <AuthedRoute path="/login" component={LoginPage} />
@@ -50,6 +57,7 @@ class App extends Component {
                     <PrivateRoute path="/edit/:id" component={EditPost} />
                     <PrivateRoute path="/categories" component={SortByCategory} />
                     <PrivateRoute path="/profile/:username" component={Profile} />
+                    <AdminRoute path="/admin" component={Admin} />
                     <Route path="*" component={Error} />
                 </Switch>
                 <Footer/>

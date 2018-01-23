@@ -147,7 +147,7 @@ class EditPost extends Component {
             this.state.time
         );
         if (res.success) {
-            toastr.success('Post Uploaded Successfully')
+            toastr.success('Post Updated Successfully')
         }
         this.props.history.push(`/details/${this.props.match.params.id}`);
     }

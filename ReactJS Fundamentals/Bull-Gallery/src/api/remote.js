@@ -20,7 +20,7 @@ const postCommentUrl = `${baseUrl}/appdata/${appKey}/comments`;
 const getAllCommentsUrl = `${baseUrl}/appdata/${appKey}/comments?query=`;
 const getAvatarOfCommentUrl = `${baseUrl}/user/${appKey}?query=`;
 
-//
+
 // AUTH REQUESTS
 async function register(username, password, role, avatar) {
     const res = await fetch(`${registerUrl}`, {
@@ -175,9 +175,23 @@ async function postComment(username, comment, postId, userAvatar) {
     return await res.json();
 }
 
+async function postAddCategory(category) {
+    const res = await fetch(`${categoriesCollectionUrl}`, {
+        method: 'POST',
+        headers: {
+            Authorization: 'Kinvey ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            category: category,
+        })
+    });
+    return await res.json();
+}
+
 
 // PUT REQUESTS
-async function editProfile(id,avatar) {
+async function editProfile(id,avatar, role) {
     const res = await fetch(`${registerUrl}/${id}`, {
         method: 'PUT',
         headers: {
@@ -185,7 +199,8 @@ async function editProfile(id,avatar) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            avatar: avatar
+            avatar: avatar,
+            role: role
         })
     });
     return await res.json();
@@ -243,6 +258,16 @@ async function deleteCommentsOfPost(postId) {
     return await res.json();
 }
 
+async function deleteCategory(categoryId) {
+    const res = await fetch(`${categoriesCollectionUrl}/?query={"category":"${categoryId}"}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: 'Kinvey ' + localStorage.getItem('token')
+        }
+    });
+    return await res.json();
+}
+
 
 export {
     register,
@@ -260,6 +285,8 @@ export {
     deleteComment,
     deletePost,
     deleteCommentsOfPost,
+    deleteCategory,
     editProfile,
-    editPost
+    editPost,
+    postAddCategory
 };
