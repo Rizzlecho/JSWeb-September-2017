@@ -111,7 +111,7 @@ class Admin extends Component {
                         {this.state.categoryDel ?
                             <div className="shiny btn-download form-error">Category deleted !</div> : <span/>}
 
-                        <form onSubmit={this.onSubmitHandler} className="login-form" ref="createCatg">
+                        <form onSubmit={this.onSubmitHandler} className="admin-form" ref="createCatg">
                             <label htmlFor="title">Add Category</label>
                             <input onChange={this.onChangeHandler} id="title" name="category" type="text"
                                    placeholder="Name"/>
@@ -119,10 +119,10 @@ class Admin extends Component {
                             <button type="submit" className="btn btn--default shiny btn-login">Create</button>
                         </form>
 
-                        <form className="login-form">
+                        <form className="admin-form">
                             <label htmlFor="select">Delete Category</label>
-                            <select name="category" onChange={this.onChangeHandler} id="select">
-                                <option value="category" className="option" disabled selected>choose a category</option>
+                            <select name="category" onChange={this.onChangeHandler}>
+                                <option value="category"  disabled selected>choose a category</option>
                                 {[...this.state.categories].map((category, index) => {
                                     return <option key={index}>{category}</option>
                                 })}

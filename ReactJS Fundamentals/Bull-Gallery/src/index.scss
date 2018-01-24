@@ -852,6 +852,58 @@ textarea {
   }
 }
 
+.admin-form {
+  margin: 0 auto;
+  padding: 20px 20px 20px 20px;
+  text-align: left;
+  display: block;
+  label {
+    display: block;
+    font-size: 19px;
+    margin-top: 15px;
+  }
+  input {
+    outline: 0;
+    background: rgba(91, 98, 115, 0.97);
+    color: white;
+    width: 100%;
+    max-width: 395px;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+  button {
+    margin-top: 10px;
+    text-transform: uppercase;
+    outline: 0;
+    background: #42b6ff;
+    width: 140px;
+    padding: 15px;
+    margin-left: 25px;
+    color: #FFFFFF;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  select {
+    outline: 0;
+    background: rgba(91, 98, 115, 0.97);
+    color: white;
+    width: 100%;
+    max-width: 395px;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+}
+
+
 .header {
   text-align: center;
   text-transform: uppercase;
@@ -1004,24 +1056,19 @@ textarea {
     display: block;
   }
 
-  .tile {
-    width: 100%;
-  }
-  .wp-content h1, h1.section-header {
-    font-size: 32px;
-  }
-  .details-image {
-    min-height: 20rem;
-  }
-
   header {
     padding: 0;
     margin-top: -50px;
   }
 
+  .tile {
+    width: 100%;
+  }
+
   .tile--btn {
     bottom: 40px;
   }
+
   .tile {
     &:hover {
       transform: none;
@@ -1033,6 +1080,14 @@ textarea {
     .tile--content {
       bottom: 30px;
     }
+  }
+
+  .wp-content h1, h1.section-header {
+    font-size: 32px;
+  }
+
+  .details-image {
+    min-height: 20rem;
   }
 
   .mobile-menu .shiny {
@@ -1051,18 +1106,33 @@ textarea {
   .login-page {
     margin-left: 30px;
     margin-right: 30px;
+
   }
 
   .detailed {
     padding: 0;
   }
 
-
   .comments-section {
     textarea {
       width: 99%;
     }
 
+  }
+
+  .admin-form {
+    input{
+      margin: 15px 0 15px 0 !important;
+      max-width: 550px !important;
+    }
+    button {
+      width: 100% !important;
+      margin: 0 !important;
+    }
+    select {
+      margin: 15px 0 15px 0 !important;
+      max-width: 550px !important;
+    }
   }
 }
 
@@ -1236,24 +1306,5 @@ textarea {
 
 
 
-//
-//
-//.more {
-//  position: absolute;
-//  /* margin: 0px; */
-//  /* top: 0px; */
-//  margin-top: 2px;
-//  /* word-break: break-word; */
-//  background: rgba(0, 0, 0, 0.7);
-//  height: 50px;
-//  width: 50px;
-//  padding-left: 0px;
-//  padding-top: 2px;
-//  text-align: center;
-//}
-//
-//.list-img {
-//  height: 50px;
-//  margin-top: 2px;
-//  cursor: pointer;
-//}
+
+

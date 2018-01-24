@@ -669,6 +669,52 @@ textarea::placeholder {
   .login-form #title, .login-form #description, .login-form #image {
     margin-top: 30px; }
 
+.admin-form {
+  margin: 0 auto;
+  padding: 20px 20px 20px 20px;
+  text-align: left;
+  display: block; }
+  .admin-form label {
+    display: block;
+    font-size: 19px;
+    margin-top: 15px; }
+  .admin-form input {
+    outline: 0;
+    background: rgba(91, 98, 115, 0.97);
+    color: white;
+    width: 100%;
+    max-width: 395px;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease; }
+  .admin-form button {
+    margin-top: 10px;
+    text-transform: uppercase;
+    outline: 0;
+    background: #42b6ff;
+    width: 140px;
+    padding: 15px;
+    margin-left: 25px;
+    color: #FFFFFF;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer; }
+  .admin-form select {
+    outline: 0;
+    background: rgba(91, 98, 115, 0.97);
+    color: white;
+    width: 100%;
+    max-width: 395px;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease; }
+
 .header {
   text-align: center;
   text-transform: uppercase;
@@ -777,18 +823,12 @@ textarea::placeholder {
   .mobile-logo {
     display: block; }
 
-  .tile {
-    width: 100%; }
-
-  .wp-content h1, h1.section-header {
-    font-size: 32px; }
-
-  .details-image {
-    min-height: 20rem; }
-
   header {
     padding: 0;
     margin-top: -50px; }
+
+  .tile {
+    width: 100%; }
 
   .tile--btn {
     bottom: 40px; }
@@ -800,6 +840,12 @@ textarea::placeholder {
     padding-bottom: 30px; }
   .tile .tile--content {
     bottom: 30px; }
+
+  .wp-content h1, h1.section-header {
+    font-size: 32px; }
+
+  .details-image {
+    min-height: 20rem; }
 
   .mobile-menu .shiny {
     height: 45px; }
@@ -819,7 +865,17 @@ textarea::placeholder {
     padding: 0; }
 
   .comments-section textarea {
-    width: 99%; } }
+    width: 99%; }
+
+  .admin-form input {
+    margin: 15px 0 15px 0 !important;
+    max-width: 550px !important; }
+  .admin-form button {
+    width: 100% !important;
+    margin: 0 !important; }
+  .admin-form select {
+    margin: 15px 0 15px 0 !important;
+    max-width: 550px !important; } }
 @media screen and (max-width: 430px) {
   .properties button {
     display: block;
