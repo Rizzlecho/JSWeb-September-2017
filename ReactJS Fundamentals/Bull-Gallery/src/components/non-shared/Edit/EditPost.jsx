@@ -33,6 +33,8 @@ class EditPost extends Component {
     }
 
     async componentDidMount() {
+
+
         // GET POST DETAILS
         const res = await getPostDetails(this.props.match.params.id);
         this.setState({
@@ -45,7 +47,11 @@ class EditPost extends Component {
             time: res._kmd
         });
 
-
+        // CHECK IF TRIES TO EDIT URL AND NOT CREATOR
+        if(localStorage.getItem('username') !== this.state.creator){
+            this.props.history.push('/');
+            return
+        }
 
         if (res.error) {
             toastr.error('Loading unsuccessful');
